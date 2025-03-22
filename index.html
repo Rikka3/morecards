@@ -110,6 +110,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 200px;
+            height: 200px;
         }
         
         .shape {
@@ -118,7 +120,6 @@
             height: 100%;
         }
         
-        /* Star shape */
         .star-clippath {
             clip-path: polygon(
                 50% 0%, 61% 35%, 98% 35%, 68% 57%, 
@@ -134,7 +135,6 @@
             align-items: center;
         }
         
-        /* Heart shape */
         .heart-clippath {
             clip-path: path('M50,15 C50,15 35,0 20,0 C5,0 0,19 0,19 C0,44 50,80 50,80 C50,80 100,44 100,19 C100,19 95,0 80,0 C65,0 50,15 50,15 Z');
             width: 100%;
@@ -146,7 +146,6 @@
             align-items: center;
         }
         
-        /* Circle shape */
         .circle-clippath {
             clip-path: circle(50% at 50% 50%);
             width: 100%;
@@ -174,6 +173,7 @@
             width: auto;
             height: auto;
             object-fit: cover;
+            transform: scale(1.2);
         }
         
         .emoji {
@@ -209,16 +209,6 @@
             margin-top: 30px;
         }
 
-        .barbie-logo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 80px;
-            color: #ff1493;
-            text-shadow: 4px 4px 8px rgba(255, 105, 180, 0.5);
-            letter-spacing: 5px;
-            margin-bottom: 20px;
-        }
-        
         .name {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -239,7 +229,6 @@
             letter-spacing: 2px;
         }
         
-        /* Shape colors */
         .pink { background-color: #FF66B2; }
         .gold { background-color: #FFD700; }
         .purple { background-color: #C71585; }
@@ -258,14 +247,13 @@
         </div>
         
         <div class="card-content" id="card-content">
-            <div class="barbie-logo">BARBIE</div>
             <h1 class="title">Happy Birthday!</h1>
-            <div class="name">BUSHRA</div>
-            <div class="freaky-text">Time to get freaky!</div>
+            <div class="name">FREAKRA</div>
+            <div class="freaky-text">Time to get oiled up ig</div>
             <p class="message">
-                It's your special day to be as FREAKY as you want!
-                May your day be filled with sparkles, rainbows, and all the
-                wild adventures you deserve! Keep shining your unique light!
+                you ho. I forgor your bday, this is just a mistake of a website that I made at 1:00 am because I felt bad.
+                On serious note, This website quality sucks because I had an exam today and I kinda sacrificed that exam for this thang. 
+so here, have a thong 🩲 to wipe your tears reading from doo doo water level of website. succulent 17 to you girl(I REALLY AM WINGING YOUR AGE BTW, DONT MIND IF I AM WRONG)
             </p>
             <p class="signature">Stay freaky & fabulous! 💖</p>
         </div>
@@ -279,108 +267,71 @@
             const cardContent = document.getElementById('card-content');
             const shapesContainer = document.getElementById('shapes-container');
             
-            // Create sound
             const sound = new Howl({
-                src: ['audio.mp3'], // Placeholder
+                src: ['birthday-audio.mp3'],
                 format: ['mp3'],
                 html5: true
             });
             
-            // Array of emojis to rain down
             const emojis = ['✨', '🌈', '💖', '✨', '🌟', '⭐', '💫', '🌈', '💎', '🔮', '💕'];
-            
-            // Colors for shapes
             const colors = ['pink', 'gold', 'purple', 'blue', 'orange'];
             
-            // Function to create shape position patterns around text
             function getShapePositions() {
-                // Create positions that form a frame around the content
-                const positions = [
-                    // Top row
+                return [
                     { left: '10%', top: '10%' },
                     { left: '25%', top: '5%' },
                     { left: '50%', top: '3%' },
                     { left: '75%', top: '5%' },
                     { left: '90%', top: '10%' },
-                    
-                    // Left side
                     { left: '5%', top: '25%' },
                     { left: '3%', top: '50%' },
                     { left: '5%', top: '75%' },
-                    
-                    // Right side
                     { left: '95%', top: '25%' },
                     { left: '97%', top: '50%' },
                     { left: '95%', top: '75%' },
-                    
-                    // Bottom row
                     { left: '10%', top: '90%' },
                     { left: '25%', top: '95%' },
                     { left: '50%', top: '97%' },
                     { left: '75%', top: '95%' },
                     { left: '90%', top: '90%' }
                 ];
-                
-                return positions;
             }
             
-            // Function to create different shaped images
             function createShapedImages() {
-                // Clear existing shapes if any
                 shapesContainer.innerHTML = '';
-                
                 const positions = getShapePositions();
                 
-                // Create shapes with varying types (star, heart, circle)
                 for (let i = 0; i < positions.length; i++) {
                     const shape = document.createElement('div');
                     shape.classList.add('shape-image');
-                    
-                    // Set position from our predefined pattern
                     shape.style.left = positions[i].left;
                     shape.style.top = positions[i].top;
                     
-                    // Random size ranging from small to medium
-                    const size = Math.random() * 60 + 60;
-                    shape.style.width = size + 'px';
-                    shape.style.height = size + 'px';
-                    
-                    // Create shape container
                     const shapeElement = document.createElement('div');
                     shapeElement.classList.add('shape');
                     
-                    // Determine shape type - cycle through them
-                    let shapeType, clipPathClass;
+                    let clipPathClass;
                     switch (i % 3) {
-                        case 0: // Star
-                            shapeType = 'star';
+                        case 0:
                             clipPathClass = 'star-clippath';
                             break;
-                        case 1: // Heart
-                            shapeType = 'heart';
+                        case 1:
                             clipPathClass = 'heart-clippath';
                             break;
-                        case 2: // Circle
-                            shapeType = 'circle';
+                        case 2:
                             clipPathClass = 'circle-clippath';
                             break;
                     }
                     
-                    // Create shape-specific clip-path container
                     const clipPathContainer = document.createElement('div');
                     clipPathContainer.classList.add('shape-clippath', clipPathClass);
+                    clipPathContainer.classList.add(colors[Math.floor(Math.random() * colors.length)]);
                     
-                    // Add random color
-                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                    clipPathContainer.classList.add(randomColor);
-                    
-                    // Add image inside shape clip-path
                     const img = document.createElement('img');
                     img.src = `image${(i % 4) + 1}.jpg`;
                     img.alt = "Birthday";
                     clipPathContainer.appendChild(img);
                     
-                    // Apply wiggle animation with random duration and delay
                     const animDuration = Math.random() * 2 + 2;
                     const animDelay = Math.random() * 5;
                     shapeElement.style.animation = `wiggle ${animDuration}s ease-in-out ${animDelay}s infinite`;
@@ -391,43 +342,30 @@
                 }
             }
             
-            // Function to create emoji rain (reduced)
             function createEmojiRain() {
-                for (let i = 0; i < 30; i++) { // Reduced from 100 to 30
+                for (let i = 0; i < 30; i++) {
                     const emoji = document.createElement('div');
                     emoji.classList.add('emoji');
                     emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
                     emoji.style.left = Math.random() * 100 + 'vw';
                     emoji.style.fontSize = Math.random() * 30 + 20 + 'px';
                     emoji.style.animation = `fall ${Math.random() * 5 + 3}s linear forwards`;
-                    emoji.style.animationDelay = Math.random() * 8 + 's'; // Increased delay for less cluttering
+                    emoji.style.animationDelay = Math.random() * 8 + 's';
                     document.querySelector('.card').appendChild(emoji);
                 }
             }
             
-            // Create shape images but keep them hidden
             createShapedImages();
             
             button.addEventListener('click', function() {
-                // Hide front card
                 cardFront.style.opacity = '0';
                 setTimeout(() => {
                     cardFront.style.display = 'none';
-                    
-                    // Show content
                     cardContent.style.opacity = '1';
-                    
-                    // Show shapes
                     shapesContainer.style.opacity = '1';
-                    
-                    // Play sound
-                    // sound.play(); // Commented out as the placeholder won't actually play
-                    
-                    // Create emoji rain
+                    sound.play();
                     createEmojiRain();
-                    
-                    // Continue emoji rain but at a slower interval
-                    setInterval(createEmojiRain, 5000); // Increased from 3000 to 5000ms
+                    setInterval(createEmojiRain, 5000);
                 }, 800);
             });
         });
