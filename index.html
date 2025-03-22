@@ -176,36 +176,6 @@
             object-fit: cover;
         }
         
-        .star-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
-        }
-        
-        .heart-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
-        }
-        
-        .circle-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
-        }
-        
         .emoji {
             position: absolute;
             font-size: 24px;
@@ -242,7 +212,7 @@
         .barbie-logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: 0px;
+            font-size: 80px;
             color: #ff1493;
             text-shadow: 4px 4px 8px rgba(255, 105, 180, 0.5);
             letter-spacing: 5px;
@@ -311,7 +281,7 @@
             
             // Create sound
             const sound = new Howl({
-                src: ['https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js'], // Placeholder
+                src: ['audio.mp3'], // Placeholder
                 format: ['mp3'],
                 html5: true
             });
@@ -380,30 +350,19 @@
                     shapeElement.classList.add('shape');
                     
                     // Determine shape type - cycle through them
-                    let shapeType, clipPathClass, borderSVG;
+                    let shapeType, clipPathClass;
                     switch (i % 3) {
                         case 0: // Star
                             shapeType = 'star';
                             clipPathClass = 'star-clippath';
-                            borderSVG = `<svg viewBox="0 0 100 100" width="100%" height="100%">
-                                <path fill="none" stroke="#FF66B2" stroke-width="3"
-                                    d="M50,0 L61,35 L98,35 L68,57 L79,91 L50,70 L21,91 L32,57 L2,35 L39,35 Z" />
-                            </svg>`;
                             break;
                         case 1: // Heart
                             shapeType = 'heart';
                             clipPathClass = 'heart-clippath';
-                            borderSVG = `<svg viewBox="0 0 100 100" width="100%" height="100%">
-                                <path fill="none" stroke="#FF66B2" stroke-width="3"
-                                    d="M50,15 C50,15 35,0 20,0 C5,0 0,19 0,19 C0,44 50,80 50,80 C50,80 100,44 100,19 C100,19 95,0 80,0 C65,0 50,15 50,15 Z" />
-                            </svg>`;
                             break;
                         case 2: // Circle
                             shapeType = 'circle';
                             clipPathClass = 'circle-clippath';
-                            borderSVG = `<svg viewBox="0 0 100 100" width="100%" height="100%">
-                                <circle cx="50" cy="50" r="48" fill="none" stroke="#FF66B2" stroke-width="3" />
-                            </svg>`;
                             break;
                     }
                     
@@ -417,14 +376,9 @@
                     
                     // Add image inside shape clip-path
                     const img = document.createElement('img');
-                    img.src = `/api/placeholder/${Math.floor(size)}/${Math.floor(size)}`;
+                    img.src = `image${(i % 4) + 1}.jpg`;
                     img.alt = "Birthday";
                     clipPathContainer.appendChild(img);
-                    
-                    // Create shape border overlay
-                    const borderElement = document.createElement('div');
-                    borderElement.classList.add(`${shapeType}-border`);
-                    borderElement.innerHTML = borderSVG;
                     
                     // Apply wiggle animation with random duration and delay
                     const animDuration = Math.random() * 2 + 2;
@@ -432,7 +386,6 @@
                     shapeElement.style.animation = `wiggle ${animDuration}s ease-in-out ${animDelay}s infinite`;
                     
                     shapeElement.appendChild(clipPathContainer);
-                    shapeElement.appendChild(borderElement);
                     shape.appendChild(shapeElement);
                     shapesContainer.appendChild(shape);
                 }
